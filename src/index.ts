@@ -1,6 +1,9 @@
-type Handle = () => Promise<string>
-const fullname: string = 'Ngô Trọng Phong'
+import express from 'express'
+import databaseService from '~/services/database.services'
 
-const handle: Handle = () => Promise.resolve(fullname)
-console.log(fullname)
-handle().then(console.log)
+const app = express()
+const port = process.env.PORT
+databaseService.connect()
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
