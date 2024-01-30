@@ -60,6 +60,7 @@ class UsersService {
     await databaseService.users.insertOne(
       new User({
         ...payload,
+        _id: user_id,
         email_verify_token,
         date_of_birth: new Date(payload.date_of_birth),
         password: hashPassword(payload.password)
@@ -116,6 +117,27 @@ class UsersService {
     return {
       access_token,
       refresh_token
+    }
+  }
+
+  async resendVerifyEmail(user_id: string) {
+    const email_verify_token = (await this.signEmailVerifyToken(user_id.toString())) as string
+    console.log('Resend verify email: ' + email_verify_token)
+    await databaseService.users.updateOne(
+      {
+        _id: new ObjectId(user_id)
+      },
+      {
+        $set: {
+          email_verify_token
+        },
+        $currentDate: {
+          updated_at: true
+        }
+      }
+    )
+    return {
+      message: USERS_MESSAGES.RESEND_EMAIL_VERIFY_SUCCESS
     }
   }
 }
