@@ -2,6 +2,7 @@ import { Router } from 'express'
 import {
   emailVerifyController,
   forgotPasswordController,
+  geProfileController,
   getMeController,
   loginController,
   logoutController,
@@ -41,7 +42,7 @@ usersRouter.post(
   wrapRequestHandler(verifyForgotPasswordTokenController)
 )
 usersRouter.post('/reset-password', resetPasswordValidator, wrapRequestHandler(resetPasswordController))
-usersRouter.post('/me', accessTokenValidator, wrapRequestHandler(getMeController))
+usersRouter.get('/me', accessTokenValidator, wrapRequestHandler(getMeController))
 usersRouter.patch(
   '/me',
   accessTokenValidator,
@@ -59,5 +60,6 @@ usersRouter.patch(
   ]),
   wrapRequestHandler(updateMeController)
 )
+usersRouter.get('/:username', wrapRequestHandler(geProfileController))
 
 export default usersRouter
