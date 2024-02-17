@@ -415,6 +415,7 @@ export const verifiedUserValidator = (req: Request, res: Response, next: NextFun
       })
     )
   }
+  next()
 }
 
 export const updateMeValidator = validate(

@@ -246,7 +246,7 @@ class UsersService {
         }
       }
     )
-    return user.value
+    return user
   }
 }
 
