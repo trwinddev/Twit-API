@@ -13,7 +13,8 @@ const getGoogleAuthUrl = () => {
     scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'].join(
       ' '
     ),
-    prompt: 'consent'
+    prompt: 'consent',
+    access_type: 'offline'
   }
   const querySring = new URLSearchParams(query).toString()
   return `${url}?${querySring}`
@@ -21,6 +22,12 @@ const getGoogleAuthUrl = () => {
 const googleOAuthUrl = getGoogleAuthUrl()
 
 export default function Home() {
+  const isAuthenticated = Boolean(localStorage.getItem('access_token'))
+  const logout = () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+    window.location.reload()
+  }
   return (
     <>
       <div>
@@ -32,7 +39,13 @@ export default function Home() {
         </a>
       </div>
       <h1>OAuth 2.0</h1>
-      <Link to={googleOAuthUrl}>Login with Google</Link>
+      {isAuthenticated ? (
+        <>
+          <span>You are logged in!</span> <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <Link to={googleOAuthUrl}>Login with Google</Link>
+      )}
     </>
   )
 }
