@@ -37,6 +37,7 @@ import { wrapRequestHandler } from '~/utils/handlers'
 
 const usersRouter = Router()
 
+// authentication
 usersRouter.post('/register', registerValidator, wrapRequestHandler(registerController))
 usersRouter.post('/login', loginValidator, wrapRequestHandler(loginController))
 usersRouter.get('/oauth/google', wrapRequestHandler(oAuthController))
@@ -50,6 +51,8 @@ usersRouter.post(
   wrapRequestHandler(verifyForgotPasswordTokenController)
 )
 usersRouter.post('/reset-password', resetPasswordValidator, wrapRequestHandler(resetPasswordController))
+
+// user
 usersRouter.get('/me', accessTokenValidator, wrapRequestHandler(getMeController))
 usersRouter.patch(
   '/me',
