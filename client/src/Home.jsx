@@ -38,6 +38,9 @@ export default function Home() {
           <img src={reactLogo} className='logo react' alt='React logo' />
         </a>
       </div>
+      <video width={500} controls>
+        <source src='http://localhost:4000/static/video/9ae6f47677aa0346aa035b500.com.mp4' type='video/mp4' />
+      </video>
       <h1>OAuth 2.0</h1>
       {isAuthenticated ? (
         <>

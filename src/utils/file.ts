@@ -35,6 +35,7 @@ export const handleUploadImage = async (req: Request) => {
       if (err) {
         return reject(err)
       }
+      // eslint-disable-next-line no-extra-boolean-cast
       if (!Boolean(files.image)) {
         return reject(new Error('File is empty'))
       }
@@ -51,12 +52,11 @@ export const handleUploadVideo = async (req: Request) => {
     keepExtensions: true,
     maxFileSize: 50 * 1024 * 1024,
     filter: function ({ name, originalFilename, mimetype }) {
-      return true
-      // const valid = name === 'image' && Boolean(mimetype?.includes('image/'))
-      // if (!valid) {
-      //   form.emit('error' as any, new Error('File type is not valid') as any)
-      // }
-      // return valid
+      const valid = name === 'video' && Boolean(mimetype?.includes('mp4') || mimetype?.includes('quicktime'))
+      if (!valid) {
+        form.emit('error' as any, new Error('File type is not valid') as any)
+      }
+      return valid
     }
   })
   return new Promise<File[]>((resolve, reject) => {
@@ -64,6 +64,7 @@ export const handleUploadVideo = async (req: Request) => {
       if (err) {
         return reject(err)
       }
+      // eslint-disable-next-line no-extra-boolean-cast
       if (!Boolean(files.video)) {
         return reject(new Error('File is empty'))
       }
