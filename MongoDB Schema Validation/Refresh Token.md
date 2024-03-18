@@ -7,7 +7,9 @@
       '_id',
       'user_id',
       'token',
-      'created_at'
+      'created_at',
+      'iat',
+      'exp'
     ],
     properties: {
       _id: {
@@ -20,11 +22,19 @@
       },
       user_id: {
         bsonType: 'objectId',
-        description: '\'_id\' must be a objectId and is required'
+        description: '\'user_id\' must be a objectId and is required'
       },
       created_at: {
         bsonType: 'date',
-        description: '\'_id\' must be a date and is required'
+        description: '\'created_at\' must be a date and is required'
+      },
+      iat: {
+        bsonType: 'date',
+        description: '\'iat\' must be a date and is required'
+      },
+      exp: {
+        bsonType: 'date',
+        description: '\'exp\' must be a date and is required'
       }
     },
     additionalProperties: false
