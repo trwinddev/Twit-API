@@ -9,7 +9,11 @@ import { UPLOAD_VIDEO_DIR } from './utils/dir'
 import staticRouter from './routes/static.routes'
 config()
 
-databaseService.connect()
+databaseService.connect().then(() => {
+  databaseService.indexUsers()
+  databaseService.indexRefreshTokens()
+  databaseService.indexFollowers()
+})
 const app = express()
 const port = process.env.PORT || 4000
 initFolder()
