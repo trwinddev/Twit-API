@@ -15,6 +15,7 @@
       'forgot_password_token',
       'verify',
       'bio',
+      'twitter_circle',
       'location',
       'website',
       'username',
@@ -69,6 +70,17 @@
       bio: {
         bsonType: 'string',
         description: '\'bio\' must be a string and is required'
+      },
+      twitter_circle: {
+        bsonType: 'array',
+        uniqueItems: true,
+        additionalProperties: false,
+        properties: {
+          items: {
+            bsonType: 'objectId'
+          }
+        },
+        description: '\'twitter_circle\' must be a array and is required'
       },
       location: {
         bsonType: 'string',

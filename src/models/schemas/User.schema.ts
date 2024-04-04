@@ -14,6 +14,7 @@ interface UserType {
   verify?: UserVerifyStatus
 
   bio?: string // optional
+  twitter_circle?: ObjectId[] // optional
   location?: string // optional
   website?: string // optional
   username?: string // optional
@@ -34,6 +35,7 @@ export default class User {
   verify: UserVerifyStatus
 
   bio: string
+  twitter_circle: ObjectId[]
   location: string
   website: string
   username: string
@@ -53,6 +55,7 @@ export default class User {
     this.forgot_password_token = user.forgot_password_token || ''
     this.verify = user.verify || UserVerifyStatus.Unverified
     this.bio = user.bio || ''
+    this.twitter_circle = user.twitter_circle || []
     this.location = user.location || ''
     this.website = user.website || ''
     this.username = user.username || ''
